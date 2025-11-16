@@ -10,12 +10,12 @@ variable "aws_profile" {
 
 variable "project" {
   type    = string
-  default = "aws-lab"
+  default = ""
 }
 
 variable "env" {
   type    = string
-  default = "dev"
+  default = ""
 }
 
 variable "owner" {
@@ -40,7 +40,7 @@ variable "key_name" {
 
 variable "state_bucket_name" {
   type        = string
-  default     = "terraform-state-bucket-unique-posesco"
+  default     = ""
 }
 
 variable "workspace_key_prefix" {
