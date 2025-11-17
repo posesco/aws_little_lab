@@ -4,7 +4,7 @@ Laboratorio personal en AWS provisto con Terraform.
 
 ## Requisitos
 - AWS CLI configurado (`aws configure`) o variables de entorno AWS_*
-- Terraform >= 1.3.0
+- Terraform >= 1.6.0
 - (Opcional) S3 + DynamoDB para backend remoto
 
 ## Flujo básico
