@@ -1,24 +1,32 @@
 variable "aws_region" {
-  type    = string
-  default = ""
+  type        = string
+  description = "AWS Region"
+  default     = ""
 }
 
 variable "project" {
-  type    = string
-  default = ""
+  type        = string
+  description = "Project name"
+  default     = ""
 }
 
 variable "env" {
-  type    = string
-  default = ""
+  type        = string
+  description = "Deployment environment name"
+  default     = "dev"
+  validation {
+    condition     = contains(["dev", "staging", "prod"], var.env)
+    error_message = "Environment must be dev, staging, or prod."
+  }
 }
 
 variable "owner" {
-  type    = string
-  default = ""
+  type        = string
+  description = "Project owner"
+  default     = ""
 }
 
 variable "state_bucket_name" {
-  type    = string
-  default = ""
+  type        = string
+  description = "Bucket name, must be unique"
 }
