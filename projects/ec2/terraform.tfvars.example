@@ -1,0 +1,10 @@
+aws_region            = "us-east-1"          
+owner                 = "myowner"
+allowed_ssh_cidr_ipv4 = "X.X.X.X/32"    
+instance_type         = "t3.medium"
+key_name              = "keynameonaws"
+domain_name           = "posesco.example.com" 
+state_bucket_name     = "bucket-unique"
+lab_volume_size       = 15
+project               = "lab"
+env                   = "dev"
