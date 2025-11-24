@@ -33,10 +33,10 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_aws_region"></a> [aws\_region](#input\_aws\_region) | AWS Region | `string` | `""` | no |
+| <a name="input_aws_region"></a> [aws\_region](#input\_aws\_region) | AWS Region | `string` | n/a | yes |
 | <a name="input_env"></a> [env](#input\_env) | Deployment environment name | `string` | `"dev"` | no |
-| <a name="input_owner"></a> [owner](#input\_owner) | Project owner | `string` | `""` | no |
-| <a name="input_project"></a> [project](#input\_project) | Project name | `string` | `""` | no |
+| <a name="input_owner"></a> [owner](#input\_owner) | Project owner | `string` | `"my_owner"` | no |
+| <a name="input_project"></a> [project](#input\_project) | Project name | `string` | `"my_project"` | no |
 | <a name="input_state_bucket_name"></a> [state\_bucket\_name](#input\_state\_bucket\_name) | Bucket name, must be unique | `string` | n/a | yes |
 
 ## Outputs

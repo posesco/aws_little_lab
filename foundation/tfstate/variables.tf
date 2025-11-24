@@ -1,13 +1,12 @@
 variable "aws_region" {
   type        = string
   description = "AWS Region"
-  default     = ""
 }
 
 variable "project" {
   type        = string
   description = "Project name"
-  default     = ""
+  default     = "my_project"
 }
 
 variable "env" {
@@ -23,7 +22,7 @@ variable "env" {
 variable "owner" {
   type        = string
   description = "Project owner"
-  default     = ""
+  default     = "my_owner"
 }
 
 variable "state_bucket_name" {
