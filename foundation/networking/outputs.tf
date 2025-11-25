@@ -1,50 +1,45 @@
 output "vpc_id" {
-  description = "ID de la VPC"
+  description = "VPC ID"
   value       = aws_vpc.main.id
 }
 
 output "vpc_cidr" {
-  description = "CIDR de la VPC"
+  description = "VPC CIDR"
   value       = aws_vpc.main.cidr_block
 }
 
 output "public_subnet_ids" {
-  description = "IDs de subnets públicas"
+  description = "Public subnet IDs"
   value       = aws_subnet.public[*].id
 }
 
 output "private_subnet_ids" {
-  description = "IDs de subnets privadas"
+  description = "Private subnet IDs"
   value       = aws_subnet.private[*].id
 }
 
 output "public_subnet_cidrs" {
-  description = "CIDRs de subnets públicas"
+  description = "Public subnet CIDRs"
   value       = aws_subnet.public[*].cidr_block
 }
 
 output "private_subnet_cidrs" {
-  description = "CIDRs de subnets privadas"
+  description = "Private subnet CIDRs"
   value       = aws_subnet.private[*].cidr_block
 }
 
 output "internet_gateway_id" {
-  description = "ID del Internet Gateway"
+  description = "Internet Gateway ID"
   value       = aws_internet_gateway.main.id
 }
 
 output "s3_endpoint_id" {
-  description = "ID del VPC Endpoint para S3"
+  description = "VPC Endpoint ID for S3"
   value       = aws_vpc_endpoint.s3.id
 }
 
-output "dynamodb_endpoint_id" {
-  description = "ID del VPC Endpoint para DynamoDB"
-  value       = aws_vpc_endpoint.dynamodb.id
-}
-
 output "default_security_group_id" {
-  description = "ID del Security Group por defecto"
+  description = "Default Security Group ID"
   value       = aws_default_security_group.default.id
 }
 

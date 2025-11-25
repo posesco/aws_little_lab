@@ -6,24 +6,24 @@ resource "aws_vpc" "main" {
   tags = merge(
     local.common_tags,
     {
-      Name = "${var.environment}-shared-vpc"
+      Name    = "${var.project}-shared-vpc"
+      Project = var.project
     }
   )
 }
 
-# Internet Gateway
 resource "aws_internet_gateway" "main" {
   vpc_id = aws_vpc.main.id
 
   tags = merge(
     local.common_tags,
     {
-      Name = "${var.environment}-igw"
+      Name    = "${var.env}-igw"
+      Project = var.project
     }
   )
 }
 
-# VPC Endpoints para S3 (Gratis, evita NAT Gateway)
 resource "aws_vpc_endpoint" "s3" {
   vpc_id       = aws_vpc.main.id
   service_name = "com.amazonaws.${var.aws_region}.s3"
@@ -31,21 +31,8 @@ resource "aws_vpc_endpoint" "s3" {
   tags = merge(
     local.common_tags,
     {
-      Name = "${var.environment}-s3-endpoint"
+      Name    = "${var.env}-s3-endpoint"
+      Project = var.project
     }
   )
 }
-
-# VPC Endpoint para DynamoDB (Gratis)
-resource "aws_vpc_endpoint" "dynamodb" {
-  vpc_id       = aws_vpc.main.id
-  service_name = "com.amazonaws.${var.aws_region}.dynamodb"
-
-  tags = merge(
-    local.common_tags,
-    {
-      Name = "${var.environment}-dynamodb-endpoint"
-    }
-  )
-}
-
