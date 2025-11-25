@@ -4,7 +4,7 @@ variable "aws_region" {
   default     = "eu-west-1"
 }
 
-variable "environment" {
+variable "Env" {
   description = "Ambiente (dev, staging, prod)"
   type        = string
   default     = "dev"

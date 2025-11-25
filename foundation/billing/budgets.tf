@@ -1,16 +1,9 @@
-locals {
-  common_tags = {
-    ManagedBy   = "Terraform"
-    Environment = var.environment
-    Owner       = var.lab_owner
-    Component   = "billing-alerts"
-  }
-}
+
 
 # SNS Topic para notificaciones de presupuesto
 resource "aws_sns_topic" "budget_alerts" {
   provider = aws.us_east_1
-  name     = "${var.environment}-budget-alerts"
+  name     = "${var.env}-budget-alerts"
 
   tags = local.common_tags
 }
@@ -28,7 +21,7 @@ resource "aws_sns_topic_subscription" "budget_email_alerts" {
 resource "aws_budgets_budget" "monthly_cost" {
   provider = aws.us_east_1
 
-  name              = "${var.environment}-monthly-budget"
+  name              = "${var.env}-monthly-budget"
   budget_type       = "COST"
   limit_amount      = tostring(var.budget_limit_euros)
   limit_unit        = "USD" # AWS Budgets usa USD, luego convierte
@@ -59,7 +52,7 @@ resource "aws_budgets_budget" "monthly_cost" {
 
   cost_filter {
     name   = "TagKey"
-    values = ["Environment"]
+    values = ["Env"]
   }
 }
 
@@ -67,7 +60,7 @@ resource "aws_budgets_budget" "monthly_cost" {
 resource "aws_budgets_budget" "ec2_cost" {
   provider = aws.us_east_1
 
-  name              = "${var.environment}-ec2-budget"
+  name              = "${var.env}-ec2-budget"
   budget_type       = "COST"
   limit_amount      = tostring(var.budget_limit_euros * 0.4) # 40% del total
   limit_unit        = "USD"
@@ -92,7 +85,7 @@ resource "aws_budgets_budget" "ec2_cost" {
 resource "aws_budgets_budget" "rds_cost" {
   provider = aws.us_east_1
 
-  name              = "${var.environment}-rds-budget"
+  name              = "${var.env}-rds-budget"
   budget_type       = "COST"
   limit_amount      = tostring(var.budget_limit_euros * 0.3) # 30% del total
   limit_unit        = "USD"
@@ -117,7 +110,7 @@ resource "aws_budgets_budget" "rds_cost" {
 resource "aws_cloudwatch_metric_alarm" "billing_alarm" {
   provider = aws.us_east_1
 
-  alarm_name          = "${var.environment}-billing-alarm"
+  alarm_name          = "${var.env}-billing-alarm"
   comparison_operator = "GreaterThanThreshold"
   evaluation_periods  = "1"
   metric_name         = "EstimatedCharges"

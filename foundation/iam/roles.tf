@@ -107,7 +107,7 @@ resource "aws_iam_role_policy" "developer_tag_enforcement" {
         Condition = {
           "Null" = {
             "aws:RequestTag/Project"     = "true"
-            "aws:RequestTag/Environment" = "true"
+            "aws:RequestTag/Env" = "true"
             "aws:RequestTag/Owner"       = "true"
           }
         }

@@ -1,10 +1,10 @@
 output "developer_user_arn" {
-  description = "ARN del usuario developer"
+  description = "User ARN developer"
   value       = module.developer_user.user_arn
 }
 
 output "developer_user_name" {
-  description = "Nombre del usuario developer"
+  description = "User name developer"
   value       = module.developer_user.user_name
 }
 
