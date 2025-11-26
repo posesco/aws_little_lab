@@ -10,6 +10,7 @@ echo "Period: $START_DATE to $END_DATE"
 echo ""
 
 echo "Total Cost for Current Month:"
+echo "============================="
 aws ce get-cost-and-usage \
     --time-period Start="$START_DATE",End="$END_DATE" \
     --granularity MONTHLY \
@@ -19,6 +20,7 @@ aws ce get-cost-and-usage \
 
 echo ""
 echo "Cost by Service:"
+echo "================"
 aws ce get-cost-and-usage \
     --time-period Start="$START_DATE",End="$END_DATE" \
     --granularity MONTHLY \
@@ -29,6 +31,7 @@ aws ce get-cost-and-usage \
 
 echo ""
 echo "Cost by Region:"
+echo "==============="
 aws ce get-cost-and-usage \
     --time-period Start="$START_DATE",End="$END_DATE" \
     --granularity MONTHLY \
@@ -39,6 +42,7 @@ aws ce get-cost-and-usage \
 
 echo ""
 echo "Forecast for End of Month:"
+echo "=========================="
 aws ce get-cost-forecast \
     --time-period Start="$(date +%Y-%m-%d)",End="$(date -d "$(date +%Y-%m-01) +1 month -1 day" +%Y-%m-%d)" \
     --metric BLENDED_COST \
