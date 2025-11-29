@@ -3,8 +3,7 @@ resource "aws_s3_bucket" "tf_state" {
   tags = merge(
     local.common_tags,
     {
-      Name    = "${var.project}-tf-state"
-      Project = var.project
+      ResourceName    = "s3-tf-state"
     }
   )
   force_destroy = false

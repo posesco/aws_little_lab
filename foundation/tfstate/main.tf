@@ -1,8 +1,12 @@
-locals {
-  common_tags = {
-    ManagedBy = "Terraform"
-    Env       = var.env
-    Owner     = var.owner
+module "common_tags" {
+  source  = "../../modules/common-tags"
+  env     = var.env
+  project = "foundation"
+  additional_tags = {
     Component = "shared-tfstate"
   }
+}
+
+locals {
+  common_tags = module.common_tags.tags
 }

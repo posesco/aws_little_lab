@@ -1,28 +1,19 @@
-variable "environment" {
-  description = "Ambiente (dev, staging, prod)"
+variable "env" {
   type        = string
-  default     = "dev"
+  description = "Environment (dev, staging, prod)"
+  validation {
+    condition     = contains(["dev", "staging", "prod"], var.env)
+    error_message = "Environment must be dev, staging, or prod."
+  }
 }
 
-variable "project_name" {
-  description = "Nombre del proyecto"
+variable "project" {
   type        = string
-}
-
-variable "owner" {
-  description = "Propietario del recurso"
-  type        = string
-}
-
-variable "cost_center" {
-  description = "Centro de costos"
-  type        = string
-  default     = "lab"
+  description = "Project name"
 }
 
 variable "additional_tags" {
-  description = "Tags adicionales"
   type        = map(string)
+  description = "Additional tags to merge with base tags"
   default     = {}
 }
-

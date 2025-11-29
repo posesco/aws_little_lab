@@ -18,12 +18,4 @@ terraform {
 
 provider "aws" {
   region = var.aws_region
-  default_tags {
-    tags = {
-      Component = "foundation-tfstate"
-      Env       = var.env
-      Owner     = var.owner
-      ManagedBy = "Terraform"
-    }
-  }
 }

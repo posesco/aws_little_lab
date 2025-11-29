@@ -10,7 +10,6 @@ module "common_tags" {
 
   project_name = var.project_name
   environment  = var.environment
-  owner        = var.owner
   cost_center  = var.cost_center
 
   additional_tags = {

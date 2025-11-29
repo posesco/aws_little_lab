@@ -1,13 +1,10 @@
 locals {
-  common_tags = merge(
-    {
-      ManagedBy   = "Terraform"
-      Environment = var.environment
-      Project     = var.project_name
-      Owner       = var.owner
-      CostCenter  = var.cost_center
-      CreatedAt   = timestamp()
-    },
-    var.additional_tags
-  )
+  base_tags = {
+    ManagedBy    = "Terraform"
+    Owner        = "posesco"
+    Environment  = var.env
+    Project      = var.project
+  }
+  optional_tags = var.additional_tags != null ? var.additional_tags : {}
+  all_tags      = merge(local.base_tags, local.optional_tags)
 }

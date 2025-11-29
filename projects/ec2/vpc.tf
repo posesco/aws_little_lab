@@ -4,7 +4,7 @@ resource "aws_vpc" "lab_vpc" {
   enable_dns_support   = true
 
   tags = {
-    Name    = "${var.project}-vpc"
+    ResourceName    = "${var.project}-vpc"
     Project = var.project
     Env     = var.env
     Owner   = var.owner
@@ -19,7 +19,7 @@ resource "aws_subnet" "public" {
   availability_zone       = data.aws_availability_zones.available.names[count.index]
 
   tags = {
-    Name    = "${var.project}-public-${count.index}"
+    ResourceName    = "${var.project}-public-${count.index}"
     Tier    = "public"
     Project = var.project
   }

@@ -1,16 +1,5 @@
 aws_region = "eu-west-1"
-environment = "dev"
-lab_owner = "tu-nombre@example.com"
-allowed_regions = ["eu-west-1", "eu-central-1"]
-developer_username = "lab-developer"
-cost_center = "personal-lab"
-allowed_services = [
-  "ec2",
-  "lambda",
-  "s3",
-  "vpc",
-  "rds",
-  "cloudformation",
-  "cloudwatch",
-  "logs"
-]
+project    = "my_project"
+env        = "prod"
+owner      = "my_owner"
+force_destroy_users = false

@@ -9,7 +9,7 @@ resource "aws_subnet" "public" {
   tags = merge(
     local.common_tags,
     {
-      Name    = "${var.env}-public-subnet-${count.index + 1}"
+      ResourceName    = "${var.env}-public-subnet-${count.index + 1}"
       Type    = "Public"
       Tier    = "public"
       Project = var.project
@@ -26,7 +26,7 @@ resource "aws_subnet" "private" {
   tags = merge(
     local.common_tags,
     {
-      Name    = "${var.env}-private-subnet-${count.index + 1}"
+      ResourceName    = "${var.env}-private-subnet-${count.index + 1}"
       Type    = "Private"
       Tier    = "private"
       Project = var.project
@@ -45,7 +45,7 @@ resource "aws_route_table" "public" {
   tags = merge(
     local.common_tags,
     {
-      Name    = "${var.env}-public-rt"
+      ResourceName    = "${var.env}-public-rt"
       Project = var.project
     }
   )
@@ -64,7 +64,7 @@ resource "aws_route_table" "private" {
   tags = merge(
     local.common_tags,
     {
-      Name    = "${var.env}-private-rt"
+      ResourceName    = "${var.env}-private-rt"
       Project = var.project
     }
   )
@@ -102,7 +102,7 @@ resource "aws_default_security_group" "default" {
   tags = merge(
     local.common_tags,
     {
-      Name = "${var.env}-default-sg"
+      ResourceName = "${var.env}-default-sg"
     }
   )
 }

@@ -6,7 +6,7 @@ resource "aws_vpc" "main" {
   tags = merge(
     local.common_tags,
     {
-      Name    = "${var.project}-shared-vpc"
+      ResourceName    = "${var.project}-shared-vpc"
       Project = var.project
     }
   )
@@ -31,7 +31,7 @@ resource "aws_vpc_endpoint" "s3" {
   tags = merge(
     local.common_tags,
     {
-      Name    = "${var.env}-s3-endpoint"
+      ResourceName    = "${var.env}-s3-endpoint"
       Project = var.project
     }
   )
