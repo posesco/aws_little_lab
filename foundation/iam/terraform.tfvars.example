@@ -1,5 +1,0 @@
-aws_region = "eu-west-1"
-project    = "my_project"
-env        = "prod"
-owner      = "my_owner"
-force_destroy_users = false

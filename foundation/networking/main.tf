@@ -1,12 +1,16 @@
-locals {
-  common_tags = {
-    ManagedBy = "Terraform"
-    Env       = var.env
-    Owner     = var.owner
+data "aws_availability_zones" "available" {
+  state = "available"
+}
+
+module "common_tags" {
+  source  = "../../modules/common-tags"
+  env     = var.env
+  project = "foundation"
+  additional_tags = {
     Component = "shared-networking"
   }
 }
 
-data "aws_availability_zones" "available" {
-  state = "available"
+locals {
+  common_tags = module.common_tags.tags
 }
