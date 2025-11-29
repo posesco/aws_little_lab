@@ -1,33 +1,41 @@
-resource "aws_iam_user" "developer" {
-  name = "jesus.posada.develop"
+resource "aws_iam_user" "users" {
+  for_each = var.iam_users
+
+  name = each.key
+  path = each.value.path
 
   tags = merge(
     local.common_tags,
     {
-      Type = "human"
-      Group = "developer"
+      Type    = each.value.console_access ? "Human" : "ServiceAccount"
+      Console = each.value.console_access ? "enabled" : "disabled"
     }
   )
 }
-resource "aws_iam_access_key" "developer_access_key" {
-  user = aws_iam_user.developer.name
+
+resource "aws_iam_user_policy_attachment" "console_change_password" {
+  for_each = {
+    for username, config in var.iam_users :
+    username => config if config.console_access
+  }
+
+  user       = aws_iam_user.users[each.key].name
+  policy_arn = "arn:aws:iam::aws:policy/IAMUserChangePassword"
 }
 
-output "access_key_id" {
-  value = aws_iam_access_key.developer_access_key.id
-  sensitive = true
+resource "aws_iam_user_group_membership" "user_groups" {
+  for_each = var.iam_users
+
+  user   = aws_iam_user.users[each.key].name
+  groups = each.value.groups
 }
 
-output "secret_access_key" {
-  value = aws_iam_access_key.developer_access_key.secret
-  sensitive = true
+resource "aws_iam_access_key" "user_keys" {
+  for_each = {
+    for username, config in var.iam_users :
+    username => config if config.create_access_key
+  }
+
+  user = aws_iam_user.users[each.key].name
 }
 
-locals {
-  developer_keys_csv = "access_key,secret_key\n${aws_iam_access_key.developer_access_key.id},${aws_iam_access_key.developer_access_key.secret}"
-}
-
-resource "local_file" "developer_keys" {
-  content  = local.developer_keys_csv
-  filename = "developer-keys.csv"
-}
