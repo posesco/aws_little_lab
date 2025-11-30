@@ -6,42 +6,10 @@ output "user_arns" {
   }
 }
 
-output "service_account_access_keys" {
-  description = "Access keys for service accounts (SENSITIVE)"
+output "csv_files_created" {
+  description = "Paths to generated CSV files"
   value = {
-    for username, key in aws_iam_access_key.user_keys :
-    username => {
-      access_key_id     = key.id
-      secret_access_key = key.secret
-    }
+    service_accounts = abspath(local_file.service_account_keys.filename)
+    console_users    = abspath(local_file.console_users_info.filename)
   }
-  sensitive = true
-}
-
-output "console_users" {
-  description = "Users with console access (need password setup)"
-  value = [
-    for username, config in var.iam_users :
-    username if config.console_access
-  ]
-}
-
-output "setup_instructions" {
-  description = "Commands to set up user passwords"
-  value       = <<-EOT
-    
-    === SETUP CONSOLE PASSWORDS ===
-    Run these commands with AWS CLI:
-    
-    %{for username, config in var.iam_users~}
-    %{if config.console_access~}
-    # ${username}
-    aws iam create-login-profile \
-      --user-name ${username} \
-      --password "ThisPass2025NeedChanges" \
-      --password-reset-required
-    
-    %{endif~}
-    %{endfor~}
-  EOT
 }

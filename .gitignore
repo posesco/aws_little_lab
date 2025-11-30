@@ -116,3 +116,5 @@ lambda/__pycache__/
 *.swp
 .vscode/
 .idea/
+service-account-keys.csv
+console-users.csv

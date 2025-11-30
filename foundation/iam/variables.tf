@@ -1,7 +1,6 @@
 variable "aws_region" {
   type        = string
   description = "AWS Region"
-  default     = "eu-west-1"
 }
 variable "env" {
   type        = string
@@ -24,9 +23,7 @@ variable "iam_groups" {
       path = "/users/"
       policies = [
         "arn:aws:iam::aws:policy/AmazonEC2FullAccess",
-        "arn:aws:iam::aws:policy/AmazonRDSFullAccess",
-        "arn:aws:iam::aws:policy/AmazonS3FullAccess",
-        "arn:aws:iam::aws:policy/AWSLambda_FullAccess"
+        "arn:aws:iam::aws:policy/AmazonRDSFullAccess"
       ]
     }
     finance = {
@@ -92,4 +89,10 @@ variable "iam_users" {
     }
 
   }
+}
+
+variable "store_keys_in_secrets_manager" {
+  type        = bool
+  description = "Store service account keys in AWS Secrets Manager instead of local CSV"
+  default     = false
 }

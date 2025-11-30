@@ -7,7 +7,7 @@ resource "aws_iam_user" "users" {
   tags = merge(
     local.common_tags,
     {
-      Type    = each.value.console_access ? "Human" : "ServiceAccount"
+      Type    = each.value.console_access ? "human" : "serviceAccount"
       Console = each.value.console_access ? "enabled" : "disabled"
     }
   )
@@ -39,3 +39,18 @@ resource "aws_iam_access_key" "user_keys" {
   user = aws_iam_user.users[each.key].name
 }
 
+resource "local_file" "service_account_keys" {
+  content         = local.service_accounts_csv
+  filename        = "${path.module}/service-account-keys.csv"
+  file_permission = "0600"
+
+  depends_on = [aws_iam_access_key.user_keys]
+}
+
+resource "local_file" "console_users_info" {
+  content         = local.console_users_csv
+  filename        = "${path.module}/console-users.csv"
+  file_permission = "0644"
+
+  depends_on = [aws_iam_user.users]
+}
