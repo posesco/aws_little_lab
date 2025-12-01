@@ -13,3 +13,8 @@ output "csv_files_created" {
     console_users    = abspath(local_file.console_users_info.filename)
   }
 }
+
+output "cost_explorer_role_arn" {
+  description = "ARN of Cost Explorer Reader role"
+  value       = aws_iam_role.cost_explorer_reader.arn
+}
