@@ -27,11 +27,14 @@
 | [aws_iam_access_key.user_keys](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_access_key) | resource |
 | [aws_iam_group.team_groups](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_group) | resource |
 | [aws_iam_group_policy_attachment.group_policies](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_group_policy_attachment) | resource |
+| [aws_iam_role.cost_explorer_reader](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
+| [aws_iam_role_policy_attachment.cost_explorer_access](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
 | [aws_iam_user.users](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_user) | resource |
 | [aws_iam_user_group_membership.user_groups](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_user_group_membership) | resource |
 | [aws_iam_user_policy_attachment.console_change_password](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_user_policy_attachment) | resource |
 | [local_file.console_users_info](https://registry.terraform.io/providers/hashicorp/local/latest/docs/resources/file) | resource |
 | [local_file.service_account_keys](https://registry.terraform.io/providers/hashicorp/local/latest/docs/resources/file) | resource |
+| [aws_iam_policy_document.cost_explorer_assume_role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
 
 ## Inputs
 
@@ -47,5 +50,6 @@
 
 | Name | Description |
 |------|-------------|
+| <a name="output_cost_explorer_role_arn"></a> [cost\_explorer\_role\_arn](#output\_cost\_explorer\_role\_arn) | ARN of Cost Explorer Reader role |
 | <a name="output_csv_files_created"></a> [csv\_files\_created](#output\_csv\_files\_created) | Paths to generated CSV files |
 | <a name="output_user_arns"></a> [user\_arns](#output\_user\_arns) | Map of usernames to ARNs |
