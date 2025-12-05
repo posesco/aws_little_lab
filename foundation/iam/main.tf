@@ -7,6 +7,22 @@ module "common_tags" {
   }
 }
 
+data "aws_iam_policy_document" "cost_explorer_assume_role" {
+  statement {
+    effect = "Allow"
+
+    principals {
+      type = "AWS"
+      identifiers = [
+        for username in keys(local.service_accounts) :
+        aws_iam_user.users[username].arn
+      ]
+    }
+
+    actions = ["sts:AssumeRole"]
+
+  }
+}
 locals {
   common_tags = module.common_tags.tags
   service_accounts = {
