@@ -1,9 +1,8 @@
-aws_region  = "eu-west-1"
-environment = "dev"
-lab_owner = "tu-nombre@example.com"
-budget_limit_euros = 15
+env          = "dev"
+budget_limit = 25
 alert_emails = [
-  "tu-email@example.com"
+  "email_1@example.com",
+  "email_2example.com",
+  "email_n@example.com"
 ]
-# 80% = 12 EUR, 90% = 13.5 EUR, 100% = 15 EUR
 alert_thresholds = [80, 90, 100]

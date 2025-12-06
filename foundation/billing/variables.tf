@@ -1,33 +1,25 @@
-variable "aws_region" {
-  description = "Región principal de AWS"
+variable "env" {
   type        = string
-  default     = "eu-west-1"
-}
-
-variable "Env" {
-  description = "Ambiente (dev, staging, prod)"
-  type        = string
+  description = "Deployment environment name"
   default     = "dev"
+  validation {
+    condition     = contains(["dev", "staging", "prod"], var.env)
+    error_message = "Environment must be dev, staging, or prod."
+  }
 }
 
-variable "budget_limit_euros" {
-  description = "Límite mensual de presupuesto en EUR"
+variable "budget_limit" {
+  description = "Monthly budget limit in USD"
   type        = number
-  default     = 15
 }
 
 variable "alert_emails" {
-  description = "Emails para recibir alertas de presupuesto"
+  description = "Emails to receive budget alerts"
   type        = list(string)
 }
 
 variable "alert_thresholds" {
-  description = "Porcentajes para alertas (ej: [80, 90, 100])"
+  description = "Percentages for alerts (e.g., [80, 90, 100])"
   type        = list(number)
   default     = [80, 90, 100]
-}
-
-variable "lab_owner" {
-  description = "Propietario del laboratorio"
-  type        = string
 }
