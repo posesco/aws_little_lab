@@ -1,0 +1,5 @@
+state_bucket_name = "bucket-unique"
+aws_region        = "us-east-1"
+project           = "aws-lab"
+owner             = "myowner"
+env               = "dev"

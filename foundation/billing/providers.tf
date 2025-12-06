@@ -17,14 +17,5 @@ terraform {
 }
 
 provider "aws" {
-  region = var.aws_region
-  # profile = var.aws_profile
-    default_tags {
-    tags = {
-      Project     = var.project
-      Env         = var.env
-      Owner       = var.owner
-      ManagedBy   = "Terraform"
-    }
-  }
+  region = "us-east-1"
 }
