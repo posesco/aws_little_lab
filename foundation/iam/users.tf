@@ -41,7 +41,7 @@ resource "aws_iam_access_key" "user_keys" {
 
 resource "local_file" "service_account_keys" {
   content         = local.service_accounts_csv
-  filename        = "${path.module}/service-account-keys.csv"
+  filename        = "${path.module}/accounts/service-account-keys.csv"
   file_permission = "0600"
 
   depends_on = [aws_iam_access_key.user_keys]
@@ -49,7 +49,7 @@ resource "local_file" "service_account_keys" {
 
 resource "local_file" "console_users_info" {
   content         = local.console_users_csv
-  filename        = "${path.module}/console-users.csv"
+  filename        = "${path.module}/accounts/console-users.csv"
   file_permission = "0644"
 
   depends_on = [aws_iam_user.users]
