@@ -50,8 +50,14 @@ resource "aws_s3_bucket_lifecycle_configuration" "tf_state_lifecycle" {
       noncurrent_days = 60
     }
   }
+  rule {
+    id = "delete-old-objects"
+    status = "Enabled"
+    expiration {
+      days = 150
+    }
+  }
 }
-
 
 resource "aws_s3_bucket_server_side_encryption_configuration" "tf_state_sse" {
   bucket = aws_s3_bucket.tf_state.id
