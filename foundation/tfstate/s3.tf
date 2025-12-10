@@ -3,7 +3,7 @@ resource "aws_s3_bucket" "tf_state" {
   tags = merge(
     local.common_tags,
     {
-      ResourceName    = "s3-tf-state"
+      ResourceName = "s3-tf-state"
     }
   )
   force_destroy = false
@@ -48,13 +48,6 @@ resource "aws_s3_bucket_lifecycle_configuration" "tf_state_lifecycle" {
     filter {}
     noncurrent_version_expiration {
       noncurrent_days = 60
-    }
-  }
-  rule {
-    id = "delete-old-objects"
-    status = "Enabled"
-    expiration {
-      days = 150
     }
   }
 }
