@@ -3,10 +3,14 @@ resource "aws_s3_bucket" "tf_state" {
   tags = merge(
     local.common_tags,
     {
-      ResourceName    = "s3-tf-state"
+      ResourceName = "s3-tf-state"
     }
   )
   force_destroy = false
+
+  lifecycle {
+    prevent_destroy = true
+  }
 }
 
 resource "aws_s3_bucket_ownership_controls" "tf_state_ownership_controls" {
@@ -51,7 +55,6 @@ resource "aws_s3_bucket_lifecycle_configuration" "tf_state_lifecycle" {
     }
   }
 }
-
 
 resource "aws_s3_bucket_server_side_encryption_configuration" "tf_state_sse" {
   bucket = aws_s3_bucket.tf_state.id

@@ -38,8 +38,18 @@ output "s3_endpoint_id" {
   value       = aws_vpc_endpoint.s3.id
 }
 
+output "dynamodb_endpoint_id" {
+  description = "VPC Endpoint ID for DynamoDB"
+  value       = aws_vpc_endpoint.dynamodb.id
+}
+
 output "default_security_group_id" {
   description = "Default Security Group ID"
   value       = aws_default_security_group.default.id
+}
+
+output "availability_zones" {
+  description = "Availability zones used by subnets"
+  value       = slice(data.aws_availability_zones.available.names, 0, length(var.public_subnet_cidrs))
 }
 

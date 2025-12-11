@@ -6,6 +6,23 @@ output "user_arns" {
   }
 }
 
+output "service_account_access_keys" {
+  description = "Access key IDs for service accounts"
+  value = {
+    for username, key in aws_iam_access_key.user_keys :
+    username => key.id
+  }
+}
+
+output "service_account_secret_keys" {
+  description = "Secret access keys for service accounts"
+  value = {
+    for username, key in aws_iam_access_key.user_keys :
+    username => key.secret
+  }
+  sensitive = true
+}
+
 output "csv_files_created" {
   description = "Paths to generated CSV files"
   value = {

@@ -91,8 +91,9 @@ variable "iam_users" {
   }
 }
 
+# TODO: Implement Secrets Manager storage for access keys
 variable "store_keys_in_secrets_manager" {
   type        = bool
-  description = "Store service account keys in AWS Secrets Manager instead of local CSV"
+  description = "Store service account keys in AWS Secrets Manager instead of local CSV (not yet implemented)"
   default     = false
 }

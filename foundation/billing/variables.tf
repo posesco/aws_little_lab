@@ -1,3 +1,8 @@
+variable "aws_region" {
+  type        = string
+  description = "AWS Region (note: Budgets API always uses us-east-1 internally)"
+}
+
 variable "env" {
   type        = string
   description = "Deployment environment name"
@@ -11,6 +16,10 @@ variable "env" {
 variable "budget_limit" {
   description = "Monthly budget limit in USD"
   type        = number
+  validation {
+    condition     = var.budget_limit > 0
+    error_message = "budget_limit must be greater than 0"
+  }
 }
 
 variable "alert_emails" {

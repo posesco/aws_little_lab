@@ -82,6 +82,16 @@ resource "aws_vpc_endpoint_route_table_association" "s3_private" {
   route_table_id  = aws_route_table.private.id
   vpc_endpoint_id = aws_vpc_endpoint.s3.id
 }
+
+resource "aws_vpc_endpoint_route_table_association" "dynamodb_public" {
+  route_table_id  = aws_route_table.public.id
+  vpc_endpoint_id = aws_vpc_endpoint.dynamodb.id
+}
+
+resource "aws_vpc_endpoint_route_table_association" "dynamodb_private" {
+  route_table_id  = aws_route_table.private.id
+  vpc_endpoint_id = aws_vpc_endpoint.dynamodb.id
+}
 resource "aws_default_security_group" "default" {
   vpc_id = aws_vpc.main.id
 
