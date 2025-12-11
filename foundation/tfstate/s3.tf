@@ -7,6 +7,10 @@ resource "aws_s3_bucket" "tf_state" {
     }
   )
   force_destroy = false
+
+  lifecycle {
+    prevent_destroy = true
+  }
 }
 
 resource "aws_s3_bucket_ownership_controls" "tf_state_ownership_controls" {
