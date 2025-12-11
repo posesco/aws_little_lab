@@ -33,3 +33,15 @@ resource "aws_vpc_endpoint" "s3" {
     }
   )
 }
+
+resource "aws_vpc_endpoint" "dynamodb" {
+  vpc_id       = aws_vpc.main.id
+  service_name = "com.amazonaws.${var.aws_region}.dynamodb"
+
+  tags = merge(
+    local.common_tags,
+    {
+      ResourceName = "${var.env}-dynamodb-endpoint"
+    }
+  )
+}
