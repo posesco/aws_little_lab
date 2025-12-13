@@ -35,3 +35,18 @@ output "cost_explorer_role_arn" {
   description = "ARN of Cost Explorer Reader role"
   value       = aws_iam_role.cost_explorer_reader.arn
 }
+
+output "ec2_projects_role_arn" {
+  description = "ARN of EC2 projects role"
+  value       = aws_iam_role.ec2_projects.arn
+}
+
+output "ec2_projects_instance_profile_name" {
+  description = "Name of EC2 projects instance profile"
+  value       = aws_iam_instance_profile.ec2_projects.name
+}
+
+output "ec2_projects_instance_profile_arn" {
+  description = "ARN of EC2 projects instance profile"
+  value       = aws_iam_instance_profile.ec2_projects.arn
+}

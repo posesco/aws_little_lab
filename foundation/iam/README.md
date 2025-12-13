@@ -25,7 +25,11 @@
 | [aws_iam_access_key.user_keys](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_access_key) | resource |
 | [aws_iam_group.team_groups](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_group) | resource |
 | [aws_iam_group_policy_attachment.group_policies](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_group_policy_attachment) | resource |
+| [aws_iam_instance_profile.ec2_projects](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_instance_profile) | resource |
 | [aws_iam_role.cost_explorer_reader](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
+| [aws_iam_role.ec2_projects](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
+| [aws_iam_role_policy.ec2_dynamodb_access](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy) | resource |
+| [aws_iam_role_policy.ec2_s3_access](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy) | resource |
 | [aws_iam_role_policy_attachment.cost_explorer_access](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
 | [aws_iam_user.users](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_user) | resource |
 | [aws_iam_user_group_membership.user_groups](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_user_group_membership) | resource |
@@ -50,6 +54,9 @@
 |------|-------------|
 | <a name="output_cost_explorer_role_arn"></a> [cost\_explorer\_role\_arn](#output\_cost\_explorer\_role\_arn) | ARN of Cost Explorer Reader role |
 | <a name="output_csv_files_created"></a> [csv\_files\_created](#output\_csv\_files\_created) | Paths to generated CSV files |
+| <a name="output_ec2_projects_instance_profile_arn"></a> [ec2\_projects\_instance\_profile\_arn](#output\_ec2\_projects\_instance\_profile\_arn) | ARN of EC2 projects instance profile |
+| <a name="output_ec2_projects_instance_profile_name"></a> [ec2\_projects\_instance\_profile\_name](#output\_ec2\_projects\_instance\_profile\_name) | Name of EC2 projects instance profile |
+| <a name="output_ec2_projects_role_arn"></a> [ec2\_projects\_role\_arn](#output\_ec2\_projects\_role\_arn) | ARN of EC2 projects role |
 | <a name="output_service_account_access_keys"></a> [service\_account\_access\_keys](#output\_service\_account\_access\_keys) | Access key IDs for service accounts |
 | <a name="output_service_account_secret_keys"></a> [service\_account\_secret\_keys](#output\_service\_account\_secret\_keys) | Secret access keys for service accounts |
 | <a name="output_user_arns"></a> [user\_arns](#output\_user\_arns) | Map of usernames to ARNs |
