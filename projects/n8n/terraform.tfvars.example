@@ -1,0 +1,7 @@
+aws_region            = "eu-west-1"
+project               = "n8n"
+env                   = "dev"
+allowed_ssh_cidr_ipv4 = "X.X.X.X/32"
+instance_type         = "t4g.small"
+key_name              = "your-key-name"
+lab_volume_size       = 40
