@@ -5,13 +5,14 @@ Terraform-based Infrastructure as Code (IaC) project for managing foundational A
 ## Architecture
 
 ```
-foundation/              # Core infrastructure modules (deploy in order)
+foundation/             # Core infrastructure modules (deploy in order)
 ├── tfstate/            # S3 backend for Terraform state
 ├── networking/         # VPC, subnets, gateways, VPC endpoints
 ├── iam/                # Users, groups, roles, access keys
 └── billing/            # Budget alerts and cost monitoring
 modules/
 └── common-tags/        # Shared tagging module
+projects/               # Projects using shared infrastructure, containing tests of technologies such as lambdas, databases, vps, etc.
 scripts/                # Operational utilities
 ```
 
@@ -27,6 +28,7 @@ scripts/                # Operational utilities
 2. **networking** - Create VPC and network infrastructure
 3. **iam** - Configure identity and access management
 4. **billing** - Set up cost monitoring
+5. **projects** - Projects using shared infrastructure
 
 ## Quick Start
 
