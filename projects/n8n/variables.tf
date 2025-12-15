@@ -21,7 +21,12 @@ variable "env" {
 
 variable "allowed_ssh_cidr_ipv4" {
   type        = string
-  description = "CIDR block allowed for SSH access"
+  description = "CIDR block allowed for SSH access (IPv4)"
+}
+
+variable "allowed_ssh_cidr_ipv6" {
+  type        = string
+  description = "CIDR block allowed for SSH access (IPv6)"
 }
 
 variable "instance_type" {
