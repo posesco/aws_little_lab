@@ -45,3 +45,9 @@ variable "lab_volume_size" {
   description = "Size of the root volume in GB"
   default     = 10
 }
+
+variable "cloudflare_tunnel_token" {
+  type        = string
+  description = "Cloudflare Tunnel token for cloudflared service"
+  sensitive   = true
+}
