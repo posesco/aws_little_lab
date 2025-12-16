@@ -23,16 +23,23 @@ echo \
   $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
   tee /etc/apt/sources.list.d/docker.list > /dev/null
 
+curl -fsSL https://pkg.cloudflare.com/cloudflare-public-v2.gpg | \
+  tee /usr/share/keyrings/cloudflare-public-v2.gpg >/dev/null
+
+echo 'deb [signed-by=/usr/share/keyrings/cloudflare-public-v2.gpg] https://pkg.cloudflare.com/cloudflared any main' | \
+  tee /etc/apt/sources.list.d/cloudflared.list
+
 apt-get update -y
-apt-get install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
+apt-get install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin cloudflared
 
 usermod -aG docker ubuntu
 
 systemctl enable docker
 systemctl start docker
 
-docker --version
-docker compose version
+cloudflared service install ${cloudflare_tunnel_token}
 
 echo "=== End user_data: $(date) ==="
+
+
 
