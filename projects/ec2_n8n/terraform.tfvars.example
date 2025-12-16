@@ -6,4 +6,4 @@ allowed_ssh_cidr_ipv6 = "::/0"
 instance_type         = "t4g.small"
 key_name              = "your-key-name"
 lab_volume_size       = 40
-cloudflare_tunnel_token = "eyJhY0NC00NmEyLTg5IJ0IjoiZjIxODAzZjgtMWY0NC00NmEyLTg5OTUt"
+cloudflare_tunnel_token = "you_token_here"
