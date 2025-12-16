@@ -4,9 +4,11 @@ resource "aws_instance" "lab_instance" {
   vpc_security_group_ids      = [aws_security_group.lab_sg.id]
   key_name                    = var.key_name
   associate_public_ip_address = true
-  user_data                   = file("${path.module}/user_data.sh")
-  subnet_id                   = data.terraform_remote_state.networking.outputs.public_subnet_ids[0]
-  iam_instance_profile        = data.terraform_remote_state.iam.outputs.ec2_projects_instance_profile_name
+  user_data = templatefile("${path.module}/user_data.sh", {
+    cloudflare_tunnel_token = var.cloudflare_tunnel_token
+  })
+  subnet_id            = data.terraform_remote_state.networking.outputs.public_subnet_ids[0]
+  iam_instance_profile = data.terraform_remote_state.iam.outputs.ec2_projects_instance_profile_name
 
   metadata_options {
     http_tokens   = "required"
