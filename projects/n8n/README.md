@@ -25,17 +25,22 @@
 | [aws_instance.lab_instance](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance) | resource |
 | [aws_security_group.lab_sg](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group) | resource |
 | [aws_vpc_security_group_egress_rule.allow_all_traffic_ipv4](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc_security_group_egress_rule) | resource |
+| [aws_vpc_security_group_egress_rule.allow_all_traffic_ipv6](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc_security_group_egress_rule) | resource |
 | [aws_vpc_security_group_ingress_rule.allow_ssh_ipv4](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc_security_group_ingress_rule) | resource |
+| [aws_vpc_security_group_ingress_rule.allow_ssh_ipv6](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc_security_group_ingress_rule) | resource |
 | [aws_ami.os](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/ami) | data source |
 | [aws_availability_zones.available](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/availability_zones) | data source |
+| [terraform_remote_state.iam](https://registry.terraform.io/providers/hashicorp/terraform/latest/docs/data-sources/remote_state) | data source |
 | [terraform_remote_state.networking](https://registry.terraform.io/providers/hashicorp/terraform/latest/docs/data-sources/remote_state) | data source |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_allowed_ssh_cidr_ipv4"></a> [allowed\_ssh\_cidr\_ipv4](#input\_allowed\_ssh\_cidr\_ipv4) | CIDR block allowed for SSH access | `string` | n/a | yes |
+| <a name="input_allowed_ssh_cidr_ipv4"></a> [allowed\_ssh\_cidr\_ipv4](#input\_allowed\_ssh\_cidr\_ipv4) | CIDR block allowed for SSH access (IPv4) | `string` | n/a | yes |
+| <a name="input_allowed_ssh_cidr_ipv6"></a> [allowed\_ssh\_cidr\_ipv6](#input\_allowed\_ssh\_cidr\_ipv6) | CIDR block allowed for SSH access (IPv6) | `string` | n/a | yes |
 | <a name="input_aws_region"></a> [aws\_region](#input\_aws\_region) | AWS region | `string` | n/a | yes |
+| <a name="input_cloudflare_tunnel_token"></a> [cloudflare\_tunnel\_token](#input\_cloudflare\_tunnel\_token) | Cloudflare Tunnel token for cloudflared service | `string` | n/a | yes |
 | <a name="input_env"></a> [env](#input\_env) | Environment (dev, staging, prod) | `string` | `"dev"` | no |
 | <a name="input_instance_type"></a> [instance\_type](#input\_instance\_type) | EC2 instance type | `string` | `"t4g.small"` | no |
 | <a name="input_key_name"></a> [key\_name](#input\_key\_name) | Name of the SSH key pair in AWS | `string` | n/a | yes |
