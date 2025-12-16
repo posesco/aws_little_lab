@@ -2,10 +2,8 @@
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.6.0 |
-| <a name="requirement_archive"></a> [archive](#requirement\_archive) | ~> 2.0 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.10.0 |
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | ~> 5.0 |
-| <a name="requirement_tls"></a> [tls](#requirement\_tls) | ~> 4.0 |
 
 ## Providers
 
@@ -31,6 +29,7 @@
 |------|-------------|------|---------|:--------:|
 | <a name="input_alert_emails"></a> [alert\_emails](#input\_alert\_emails) | Emails to receive budget alerts | `list(string)` | n/a | yes |
 | <a name="input_alert_thresholds"></a> [alert\_thresholds](#input\_alert\_thresholds) | Percentages for alerts (e.g., [80, 90, 100]) | `list(number)` | <pre>[<br/>  80,<br/>  90,<br/>  100<br/>]</pre> | no |
+| <a name="input_aws_region"></a> [aws\_region](#input\_aws\_region) | AWS Region (note: Budgets API always uses us-east-1 internally) | `string` | n/a | yes |
 | <a name="input_budget_limit"></a> [budget\_limit](#input\_budget\_limit) | Monthly budget limit in USD | `number` | n/a | yes |
 | <a name="input_env"></a> [env](#input\_env) | Deployment environment name | `string` | `"dev"` | no |
 
