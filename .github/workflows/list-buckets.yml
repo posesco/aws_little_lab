@@ -1,0 +1,43 @@
+name: List S3 Buckets
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment to use'
+        required: true
+        default: 'dev'
+        type: choice
+        options:
+          - dev
+          - staging
+          - prod
+
+      aws_region:
+        description: 'AWS Region to use'
+        required: true
+        default: 'eu-west-1'
+        type: choice
+        options:
+          - eu-west-1
+          - us-east-1
+          - us-west-2
+
+permissions:
+  id-token: write   
+  contents: read
+
+jobs:
+  list-buckets:
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.environment }}
+
+    steps:
+      - name: Configure AWS Credentials (OIDC)
+        uses: aws-actions/configure-aws-credentials@v5.1.1
+        with:
+          aws-region: ${{ inputs.aws_region }}
+          role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/github-actions-terraform-${{ inputs.environment }}
+
+      - name: List all S3 buckets
+        run: aws s3 ls
