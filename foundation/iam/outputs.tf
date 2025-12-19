@@ -50,3 +50,18 @@ output "ec2_projects_instance_profile_arn" {
   description = "ARN of EC2 projects instance profile"
   value       = aws_iam_instance_profile.ec2_projects.arn
 }
+
+output "github_oidc_provider_arn" {
+  description = "ARN of GitHub OIDC identity provider"
+  value       = aws_iam_openid_connect_provider.github.arn
+}
+
+output "github_actions_role_arn" {
+  description = "ARN of IAM role for GitHub Actions (use this in your workflow)"
+  value       = aws_iam_role.github_actions.arn
+}
+
+output "github_actions_role_name" {
+  description = "Name of IAM role for GitHub Actions"
+  value       = aws_iam_role.github_actions.name
+}

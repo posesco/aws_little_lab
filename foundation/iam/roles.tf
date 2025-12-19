@@ -41,55 +41,6 @@ resource "aws_iam_role" "ec2_projects" {
   )
 }
 
-resource "aws_iam_role_policy" "ec2_s3_access" {
-  name = "${var.env}-ec2-s3-access"
-  role = aws_iam_role.ec2_projects.id
-
-  policy = jsonencode({
-    Version = "2012-10-17"
-    Statement = [
-      {
-        Sid    = "S3Access"
-        Effect = "Allow"
-        Action = [
-          "s3:GetObject",
-          "s3:PutObject",
-          "s3:DeleteObject",
-          "s3:ListBucket"
-        ]
-        Resource = [
-          "arn:aws:s3:::${var.env}-*",
-          "arn:aws:s3:::${var.env}-*/*"
-        ]
-      }
-    ]
-  })
-}
-
-resource "aws_iam_role_policy" "ec2_dynamodb_access" {
-  name = "${var.env}-ec2-dynamodb-access"
-  role = aws_iam_role.ec2_projects.id
-
-  policy = jsonencode({
-    Version = "2012-10-17"
-    Statement = [
-      {
-        Sid    = "DynamoDBAccess"
-        Effect = "Allow"
-        Action = [
-          "dynamodb:GetItem",
-          "dynamodb:PutItem",
-          "dynamodb:UpdateItem",
-          "dynamodb:DeleteItem",
-          "dynamodb:Query",
-          "dynamodb:Scan"
-        ]
-        Resource = "arn:aws:dynamodb:${var.aws_region}:*:table/${var.env}-*"
-      }
-    ]
-  })
-}
-
 resource "aws_iam_instance_profile" "ec2_projects" {
   name = "${var.env}-ec2-projects-profile"
   role = aws_iam_role.ec2_projects.name
@@ -101,3 +52,50 @@ resource "aws_iam_instance_profile" "ec2_projects" {
     }
   )
 }
+
+resource "aws_iam_role" "github_actions" {
+  name        = "github-actions-terraform-${var.env}"
+  description = "Role assumed by GitHub Actions for Terraform deployments via OIDC"
+
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [{
+      Effect = "Allow"
+      Principal = {
+        Federated = aws_iam_openid_connect_provider.github.arn
+      }
+      Action = "sts:AssumeRoleWithWebIdentity"
+      Condition = {
+        StringEquals = {
+          "token.actions.githubusercontent.com:aud" = "sts.amazonaws.com"
+        }
+        StringLike = {
+          "token.actions.githubusercontent.com:sub" = [
+            for pattern in var.github_oidc_allowed_subjects :
+            "repo:${var.github_repository}:${pattern}"
+          ]
+        }
+      }
+    }]
+  })
+
+  tags = merge(
+    local.common_tags,
+    {
+      ResourceName = "${var.env}-github-actions-terraform"
+      AssumedBy    = "GitHubActions"
+      Repository   = var.github_repository
+    }
+  )
+}
+
+resource "aws_iam_role_policy_attachment" "github_actions_power_user" {
+  role       = aws_iam_role.github_actions.name
+  policy_arn = "arn:aws:iam::aws:policy/PowerUserAccess"
+}
+
+resource "aws_iam_role_policy_attachment" "github_actions_iam_readonly" {
+  role       = aws_iam_role.github_actions.name
+  policy_arn = "arn:aws:iam::aws:policy/IAMReadOnlyAccess"
+}
+

@@ -97,3 +97,31 @@ variable "store_keys_in_secrets_manager" {
   description = "Store service account keys in AWS Secrets Manager instead of local CSV (not yet implemented)"
   default     = false
 }
+
+# =============================================================================
+# GitHub Actions OIDC Configuration
+# =============================================================================
+
+variable "github_repository" {
+  type        = string
+  description = "GitHub repository in format 'owner/repo' (e.g., 'hashicorp/terraform')"
+  default     = "owner/repo"
+}
+
+variable "github_oidc_allowed_subjects" {
+  type        = list(string)
+  description = "List of allowed subject patterns for OIDC (e.g., 'ref:refs/heads/main', 'environment:prod', 'pull_request')"
+  default = [
+    "ref:refs/heads/master",
+    "pull_request",
+    "environment:dev",
+    "environment:staging",
+    "environment:prod"
+  ]
+}
+
+variable "tfstate_bucket_name" {
+  type        = string
+  description = "Name of the S3 bucket storing Terraform state (for OIDC role permissions)"
+  default     = "aws-lab-tfstate"
+}
