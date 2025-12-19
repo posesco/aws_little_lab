@@ -1,0 +1,16 @@
+name: AWS Continuous Integration
+run-name: ${{ github.actor }} is testing out GitHub Actions workflows
+on: [push]
+jobs:
+  Explore-GitHub-Actions:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v6
+      - name: List files in the repository
+        run: |
+          ls ${{ github.workspace }}
+      - name: Looking environment variables...
+        run: printenv
+
+        

@@ -91,6 +91,26 @@ variable "iam_users" {
   }
 }
 
+variable "github_repository" {
+  type        = string
+  description = "GitHub repository in format 'owner/repo' (e.g., 'hashicorp/terraform')"
+}
+
+variable "github_oidc_allowed_subjects" {
+  type        = list(string)
+  description = "List of allowed subject patterns for OIDC (e.g., 'ref:refs/heads/main', 'environment:prod', 'pull_request')"
+  default = [
+    "ref:refs/heads/main",
+    "pull_request",
+    "environment:prod"
+  ]
+}
+
+variable "tfstate_bucket_name" {
+  type        = string
+  description = "Name of the S3 bucket storing Terraform state (for OIDC role permissions)"
+}
+
 # TODO: Implement Secrets Manager storage for access keys
 variable "store_keys_in_secrets_manager" {
   type        = bool
