@@ -1,4 +1,5 @@
-name: List S3 Buckets
+name: Test Git Hub Workflows 
+run-name: ${{ github.actor }} is testing out GitHub Actions workflows
 
 on:
   workflow_dispatch:
@@ -28,7 +29,7 @@ permissions:
   contents: read
 
 jobs:
-  list-buckets:
+  Explore_AWS:
     runs-on: ubuntu-latest
     environment: ${{ inputs.environment }}
 
@@ -40,4 +41,20 @@ jobs:
           role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/github-actions-terraform-${{ inputs.environment }}
 
       - name: List all S3 buckets
-        run: aws s3 ls
+        run: aws s3api list-buckets --output table 
+        
+  Explore_Repository:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - name: List files in the repository
+        run: |
+          ls ${{ github.workspace }}
+          tree -L 2 ${{ github.workspace }}
+      - name: Looking environment variables...
+        run: printenv
+
+        

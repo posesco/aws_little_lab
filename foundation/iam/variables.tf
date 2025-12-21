@@ -2,15 +2,6 @@ variable "aws_region" {
   type        = string
   description = "AWS Region"
 }
-variable "env" {
-  type        = string
-  description = "Deployment environment name"
-  default     = "dev"
-  validation {
-    condition     = contains(["dev", "staging", "prod"], var.env)
-    error_message = "Environment must be dev, staging, or prod."
-  }
-}
 
 variable "iam_groups" {
   type = map(object({
@@ -38,7 +29,7 @@ variable "iam_groups" {
         "arn:aws:iam::aws:policy/AdministratorAccess"
       ]
     }
-    pipeline-deployers = {
+    cli-deployers = {
       path = "/service-accounts/"
       policies = [
         "arn:aws:iam::aws:policy/PowerUserAccess",
@@ -83,7 +74,7 @@ variable "iam_users" {
     }
     pipeline-dev = {
       path              = "/service-accounts/"
-      groups            = ["pipeline-deployers"]
+      groups            = ["cli-deployers"]
       console_access    = false
       create_access_key = true
     }
@@ -98,10 +89,12 @@ variable "github_repository" {
 
 variable "github_oidc_allowed_subjects" {
   type        = list(string)
-  description = "List of allowed subject patterns for OIDC (e.g., 'ref:refs/heads/main', 'environment:prod', 'pull_request')"
+  description = "List of allowed subject patterns for OIDC (e.g., 'ref:refs/heads/master', 'environment:prod', 'pull_request')"
   default = [
-    "ref:refs/heads/main",
+    "ref:refs/heads/master",
     "pull_request",
+    "environment:dev",
+    "environment:staging",
     "environment:prod"
   ]
 }

@@ -1,8 +1,13 @@
-env          = "dev"
-budget_limit = 25
+# Budget limits per environment (values in USD)
+budget_limits = {
+  dev     = 10.0
+  staging = 20.0
+  prod    = 30.0
+}
+
 alert_emails = [
   "email_1@example.com",
-  "email_2example.com",
+  "email_2@example.com",
   "email_n@example.com"
 ]
 alert_thresholds = [80, 90, 100]

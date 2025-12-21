@@ -27,11 +27,10 @@
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_alert_emails"></a> [alert\_emails](#input\_alert\_emails) | Emails to receive budget alerts | `list(string)` | n/a | yes |
+| <a name="input_alert_emails"></a> [alert\_emails](#input\_alert\_emails) | Emails to receive budget alerts | `list(string)` | <pre>[<br/>  "example@example.com",<br/>  "example2@example.com"<br/>]</pre> | no |
 | <a name="input_alert_thresholds"></a> [alert\_thresholds](#input\_alert\_thresholds) | Percentages for alerts (e.g., [80, 90, 100]) | `list(number)` | <pre>[<br/>  80,<br/>  90,<br/>  100<br/>]</pre> | no |
 | <a name="input_aws_region"></a> [aws\_region](#input\_aws\_region) | AWS Region (note: Budgets API always uses us-east-1 internally) | `string` | n/a | yes |
-| <a name="input_budget_limit"></a> [budget\_limit](#input\_budget\_limit) | Monthly budget limit in USD | `number` | n/a | yes |
-| <a name="input_env"></a> [env](#input\_env) | Deployment environment name | `string` | `"dev"` | no |
+| <a name="input_budget_limits"></a> [budget\_limits](#input\_budget\_limits) | Monthly budget limit in USD per environment | `map(number)` | <pre>{<br/>  "dev": 10,<br/>  "prod": 30,<br/>  "staging": 20<br/>}</pre> | no |
 
 ## Outputs
 
@@ -39,3 +38,7 @@
 |------|-------------|
 | <a name="output_budget_limit"></a> [budget\_limit](#output\_budget\_limit) | Configured budget limit |
 | <a name="output_budget_name"></a> [budget\_name](#output\_budget\_name) | Budget name |
+
+## Diagram
+
+![Terraform Graph](../../media/billing_graph.svg)

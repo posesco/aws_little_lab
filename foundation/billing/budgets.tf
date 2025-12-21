@@ -1,7 +1,7 @@
 resource "aws_budgets_budget" "monthly_cost" {
-  name              = "${var.env}-monthly-budget"
+  name              = "${local.env}-monthly-budget"
   budget_type       = "COST"
-  limit_amount      = tostring(var.budget_limit)
+  limit_amount      = tostring(local.budget_limit)
   limit_unit        = "USD"
   time_period_start = "2024-01-01_00:00"
   time_period_end   = "2030-12-31_23:59"
@@ -29,7 +29,7 @@ resource "aws_budgets_budget" "monthly_cost" {
   tags = merge(
     local.common_tags,
     {
-      ResourceName = "${var.env}-monthly-budget"
+      ResourceName = "${local.env}-monthly-budget"
     }
   )
 

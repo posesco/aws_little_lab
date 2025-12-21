@@ -1,6 +1,6 @@
 module "common_tags" {
   source  = "../../modules/common-tags"
-  env     = var.env
+  env     = "global"
   project = "foundation"
   additional_tags = {
     Component = "iam"

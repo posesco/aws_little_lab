@@ -2,9 +2,13 @@ data "aws_availability_zones" "available" {
   state = "available"
 }
 
+locals {
+  env = terraform.workspace
+}
+
 module "common_tags" {
   source  = "../../modules/common-tags"
-  env     = var.env
+  env     = local.env
   project = "foundation"
   additional_tags = {
     Component = "shared-networking"

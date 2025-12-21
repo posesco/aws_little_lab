@@ -12,7 +12,7 @@ foundation/             # Core infrastructure modules (deploy in order)
 └── billing/            # Budget alerts and cost monitoring
 modules/
 └── common-tags/        # Shared tagging module
-projects/               # Projects using shared infrastructure, containing tests of technologies such as lambdas, databases, vps, etc.
+projects/               # Projects using shared infrastructure.
 scripts/                # Operational utilities
 ```
 
@@ -59,7 +59,7 @@ RBAC groups with predefined permissions:
 | admins | AdministratorAccess |
 | developers | EC2 + RDS full access |
 | finance | Billing read-only |
-| pipeline-deployers | PowerUser + IAM read-only |
+| cli-deployers | PowerUser + IAM read-only |
 
 ### billing
 AWS Budget alerts with configurable thresholds and email notifications.
@@ -70,10 +70,17 @@ AWS Budget alerts with configurable thresholds and email notifications.
 |--------|-------------|
 | `scripts/assume-role.sh` | Manage Cost Explorer role assumption |
 | `scripts/cost-report.sh` | Generate AWS cost reports |
+| `scripts/tf-docs.sh` | Auto-generates documentation |
 
 ## Tagging Strategy
 
 All resources include standard tags: `ManagedBy`, `Owner`, `Environment`, `Project`, `Component`.
+
+## Documentation
+
+| Document | Description |
+|----------|-------------|
+| [Git Strategy](docs/git-strategy.md) | Branching model, CI/CD pipeline, environments |
 
 ## License
 
