@@ -5,12 +5,13 @@ set -e
 
 CREDENTIALS_FILE="/tmp/aws-assumed-role-$$"
 EXPIRATION_FILE="/tmp/aws-role-expiration-$$"
+AWS_ACCOUNT_ID="${AWS_ACCOUNT_ID}"
 
 assume_role() {
     echo "Assuming Cost Explorer role..."
     
     local creds=$(aws sts assume-role \
-        --role-arn arn:aws:iam::137891077920:role/cost-explorer-reader \
+        --role-arn arn:aws:iam::$AWS_ACCOUNT_ID:role/cost-explorer-reader \
         --role-session-name cost-explorer-$$-$(date +%s) \
         --duration-seconds 3600 \
         --output json)
