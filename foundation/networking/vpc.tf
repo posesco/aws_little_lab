@@ -17,7 +17,7 @@ resource "aws_internet_gateway" "main" {
   tags = merge(
     local.common_tags,
     {
-      ResourceName = "${var.env}-igw"
+      ResourceName = "${local.env}-igw"
     }
   )
 }
@@ -29,7 +29,7 @@ resource "aws_vpc_endpoint" "s3" {
   tags = merge(
     local.common_tags,
     {
-      ResourceName = "${var.env}-s3-endpoint"
+      ResourceName = "${local.env}-s3-endpoint"
     }
   )
 }
@@ -41,7 +41,7 @@ resource "aws_vpc_endpoint" "dynamodb" {
   tags = merge(
     local.common_tags,
     {
-      ResourceName = "${var.env}-dynamodb-endpoint"
+      ResourceName = "${local.env}-dynamodb-endpoint"
     }
   )
 }
