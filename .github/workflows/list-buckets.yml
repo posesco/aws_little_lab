@@ -29,7 +29,7 @@ permissions:
   contents: read
 
 jobs:
-  list-buckets:
+  Explore_AWS:
     runs-on: ubuntu-latest
     environment: ${{ inputs.environment }}
 
@@ -41,12 +41,9 @@ jobs:
           role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/github-actions-terraform-${{ inputs.environment }}
 
       - name: List all S3 buckets
-        run: aws s3api list-buckets --output table
-
-      - name: Get AWS Caller Identity
-        run: aws sts get-caller-identity  
-
-  Explore-GitHub-Actions:
+        run: aws s3api list-buckets --output table 
+        
+  Explore_Repository:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository code
@@ -56,6 +53,7 @@ jobs:
       - name: List files in the repository
         run: |
           ls ${{ github.workspace }}
+          tree -L 2 ${{ github.workspace }}
       - name: Looking environment variables...
         run: printenv
 
