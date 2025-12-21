@@ -34,7 +34,6 @@
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_aws_region"></a> [aws\_region](#input\_aws\_region) | AWS Region | `string` | n/a | yes |
-| <a name="input_env"></a> [env](#input\_env) | Deployment environment name | `string` | `"dev"` | no |
 | <a name="input_state_bucket_name"></a> [state\_bucket\_name](#input\_state\_bucket\_name) | Bucket name, must be unique | `string` | n/a | yes |
 
 ## Outputs
@@ -43,3 +42,7 @@
 |------|-------------|
 | <a name="output_s3_state_bucket"></a> [s3\_state\_bucket](#output\_s3\_state\_bucket) | S3 bucket for remote status |
 | <a name="output_s3_state_bucket_arn"></a> [s3\_state\_bucket\_arn](#output\_s3\_state\_bucket\_arn) | S3 bucket ARN |
+
+## Diagram
+
+![Terraform Graph](../../media/tfstate_graph.svg)
