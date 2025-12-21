@@ -18,7 +18,7 @@ resource "aws_iam_role_policy_attachment" "cost_explorer_access" {
 }
 
 resource "aws_iam_role" "ec2_projects" {
-  name        = "${var.env}-ec2-projects-role"
+  name        = "ec2-projects-role"
   description = "Role for EC2 instances in projects with S3 and DynamoDB access"
 
   assume_role_policy = jsonencode({
@@ -35,26 +35,26 @@ resource "aws_iam_role" "ec2_projects" {
   tags = merge(
     local.common_tags,
     {
-      ResourceName = "${var.env}-ec2-projects-role"
+      ResourceName = "ec2-projects-role"
       AssumedBy    = "EC2"
     }
   )
 }
 
 resource "aws_iam_instance_profile" "ec2_projects" {
-  name = "${var.env}-ec2-projects-profile"
+  name = "ec2-projects-profile"
   role = aws_iam_role.ec2_projects.name
 
   tags = merge(
     local.common_tags,
     {
-      ResourceName = "${var.env}-ec2-projects-profile"
+      ResourceName = "ec2-projects-profile"
     }
   )
 }
 
 resource "aws_iam_role" "github_actions" {
-  name        = "github-actions-terraform-${var.env}"
+  name        = "github-actions-terraform"
   description = "Role assumed by GitHub Actions for Terraform deployments via OIDC"
 
   assume_role_policy = jsonencode({
@@ -82,7 +82,7 @@ resource "aws_iam_role" "github_actions" {
   tags = merge(
     local.common_tags,
     {
-      ResourceName = "${var.env}-github-actions-terraform"
+      ResourceName = "github-actions-terraform"
       AssumedBy    = "GitHubActions"
       Repository   = var.github_repository
     }

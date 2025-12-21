@@ -1,5 +1,5 @@
 resource "aws_iam_role_policy" "ec2_s3_access" {
-  name = "${var.env}-ec2-s3-access"
+  name = "ec2-s3-access"
   role = aws_iam_role.ec2_projects.id
 
   policy = jsonencode({
@@ -14,9 +14,10 @@ resource "aws_iam_role_policy" "ec2_s3_access" {
           "s3:DeleteObject",
           "s3:ListBucket"
         ]
+        # TODO: Restrict to specific buckets as needed
         Resource = [
-          "arn:aws:s3:::${var.env}-*",
-          "arn:aws:s3:::${var.env}-*/*"
+          "arn:aws:s3:::*",
+          "arn:aws:s3:::*/*"
         ]
       }
     ]
@@ -24,7 +25,7 @@ resource "aws_iam_role_policy" "ec2_s3_access" {
 }
 
 resource "aws_iam_role_policy" "ec2_dynamodb_access" {
-  name = "${var.env}-ec2-dynamodb-access"
+  name = "ec2-dynamodb-access"
   role = aws_iam_role.ec2_projects.id
 
   policy = jsonencode({
@@ -41,14 +42,14 @@ resource "aws_iam_role_policy" "ec2_dynamodb_access" {
           "dynamodb:Query",
           "dynamodb:Scan"
         ]
-        Resource = "arn:aws:dynamodb:${var.aws_region}:*:table/${var.env}-*"
+        Resource = "arn:aws:dynamodb:${var.aws_region}:*:table/*"
       }
     ]
   })
 }
 
 resource "aws_iam_role_policy" "github_actions_iam_limited" {
-  name = "github-actions-iam-limited-${var.env}"
+  name = "github-actions-iam-limited-management"
   role = aws_iam_role.github_actions.id
 
   policy = jsonencode({
@@ -75,8 +76,9 @@ resource "aws_iam_role_policy" "github_actions_iam_limited" {
           "iam:UntagInstanceProfile"
         ]
         Resource = [
-          "arn:aws:iam::*:role/${var.env}-*",
-          "arn:aws:iam::*:instance-profile/${var.env}-*"
+          # TODO: Scope down resources as needed
+          "arn:aws:iam::*:role/*",
+          "arn:aws:iam::*:instance-profile/*"
         ]
       },
       {
@@ -90,7 +92,7 @@ resource "aws_iam_role_policy" "github_actions_iam_limited" {
           "iam:TagPolicy",
           "iam:UntagPolicy"
         ]
-        Resource = "arn:aws:iam::*:policy/${var.env}-*"
+        Resource = "arn:aws:iam::*:policy/*"
       },
       {
         Sid    = "OIDCProviderManagement"
@@ -110,12 +112,8 @@ resource "aws_iam_role_policy" "github_actions_iam_limited" {
   })
 }
 
-
-# -----------------------------------------------------------------------------
-# S3 Backend Access (for Terraform state)
-# -----------------------------------------------------------------------------
 resource "aws_iam_role_policy" "github_actions_tfstate" {
-  name = "github-actions-tfstate-${var.env}"
+  name = "github-actions-tfstate-access"
   role = aws_iam_role.github_actions.id
 
   policy = jsonencode({
