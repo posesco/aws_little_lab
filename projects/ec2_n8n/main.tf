@@ -1,6 +1,3 @@
-locals {
-  env = terraform.workspace
-}
 module "common_tags" {
   source  = "../../modules/common-tags"
   env     = local.env
@@ -8,6 +5,7 @@ module "common_tags" {
 }
 
 locals {
+  env         = terraform.workspace
   common_tags = module.common_tags.tags
 }
 
