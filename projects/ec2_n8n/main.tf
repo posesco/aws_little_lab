@@ -1,6 +1,9 @@
+locals {
+  env = terraform.workspace
+}
 module "common_tags" {
   source  = "../../modules/common-tags"
-  env     = var.env
+  env     = local.env
   project = var.project
 }
 
@@ -9,11 +12,13 @@ locals {
 }
 
 data "terraform_remote_state" "networking" {
-  backend = "s3"
+  backend   = "s3"
+  workspace = terraform.workspace
   config = {
-    bucket = "terraform-state-bucket-unique-posesco"
-    key    = "foundation/networking/terraform.tfstate"
-    region = "eu-west-1"
+    bucket               = "terraform-state-bucket-unique-posesco"
+    key                  = "foundation/networking/terraform.tfstate"
+    region               = "eu-west-1"
+    workspace_key_prefix = "workspaces"
   }
 }
 
@@ -24,10 +29,6 @@ data "terraform_remote_state" "iam" {
     key    = "foundation/iam/terraform.tfstate"
     region = "eu-west-1"
   }
-}
-
-data "aws_availability_zones" "available" {
-  state = "available"
 }
 
 data "aws_ami" "os" {
