@@ -4,6 +4,7 @@ data "aws_availability_zones" "available" {
 
 locals {
   env = terraform.workspace
+  common_tags = module.common_tags.tags
 }
 
 module "common_tags" {
@@ -15,6 +16,3 @@ module "common_tags" {
   }
 }
 
-locals {
-  common_tags = module.common_tags.tags
-}
