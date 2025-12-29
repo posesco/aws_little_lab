@@ -29,7 +29,6 @@
 | [aws_vpc_security_group_ingress_rule.allow_ssh_ipv4](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc_security_group_ingress_rule) | resource |
 | [aws_vpc_security_group_ingress_rule.allow_ssh_ipv6](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc_security_group_ingress_rule) | resource |
 | [aws_ami.os](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/ami) | data source |
-| [aws_availability_zones.available](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/availability_zones) | data source |
 | [terraform_remote_state.iam](https://registry.terraform.io/providers/hashicorp/terraform/latest/docs/data-sources/remote_state) | data source |
 | [terraform_remote_state.networking](https://registry.terraform.io/providers/hashicorp/terraform/latest/docs/data-sources/remote_state) | data source |
 
@@ -40,11 +39,10 @@
 | <a name="input_allowed_ssh_cidr_ipv4"></a> [allowed\_ssh\_cidr\_ipv4](#input\_allowed\_ssh\_cidr\_ipv4) | CIDR block allowed for SSH access (IPv4) | `string` | n/a | yes |
 | <a name="input_allowed_ssh_cidr_ipv6"></a> [allowed\_ssh\_cidr\_ipv6](#input\_allowed\_ssh\_cidr\_ipv6) | CIDR block allowed for SSH access (IPv6) | `string` | n/a | yes |
 | <a name="input_aws_region"></a> [aws\_region](#input\_aws\_region) | AWS region | `string` | n/a | yes |
-| <a name="input_cloudflare_tunnel_token"></a> [cloudflare\_tunnel\_token](#input\_cloudflare\_tunnel\_token) | Cloudflare Tunnel token for cloudflared service | `string` | n/a | yes |
-| <a name="input_env"></a> [env](#input\_env) | Environment (dev, staging, prod) | `string` | `"dev"` | no |
-| <a name="input_instance_type"></a> [instance\_type](#input\_instance\_type) | EC2 instance type | `string` | `"t4g.small"` | no |
-| <a name="input_key_name"></a> [key\_name](#input\_key\_name) | Name of the SSH key pair in AWS | `string` | n/a | yes |
-| <a name="input_lab_volume_size"></a> [lab\_volume\_size](#input\_lab\_volume\_size) | Size of the root volume in GB | `number` | `10` | no |
+| <a name="input_cloudflare_tunnel_token"></a> [cloudflare\_tunnel\_token](#input\_cloudflare\_tunnel\_token) | Cloudflare Tunnel token for cloudflared service per environment | `map(string)` | <pre>{<br/>  "dev": "token_dev_value",<br/>  "prod": "token_prod_value",<br/>  "staging": "token_staging_value"<br/>}</pre> | no |
+| <a name="input_instance_type"></a> [instance\_type](#input\_instance\_type) | EC2 instance type | `map(string)` | <pre>{<br/>  "dev": "t4g.small",<br/>  "prod": "t4g.large",<br/>  "staging": "t4g.medium"<br/>}</pre> | no |
+| <a name="input_key_name"></a> [key\_name](#input\_key\_name) | Name of the SSH key pair in AWS | `map(string)` | <pre>{<br/>  "dev": "keypair_dev",<br/>  "prod": "keypair_prod",<br/>  "staging": "keypair_staging"<br/>}</pre> | no |
+| <a name="input_lab_volume_size"></a> [lab\_volume\_size](#input\_lab\_volume\_size) | Size of the root volume in GB | `map(number)` | <pre>{<br/>  "dev": 10,<br/>  "prod": 50,<br/>  "staging": 50<br/>}</pre> | no |
 | <a name="input_project"></a> [project](#input\_project) | Project name | `string` | `"n8n"` | no |
 
 ## Outputs
@@ -55,3 +53,7 @@
 | <a name="output_instance_public_dns"></a> [instance\_public\_dns](#output\_instance\_public\_dns) | Public DNS assigned to the instance |
 | <a name="output_instance_public_ip"></a> [instance\_public\_ip](#output\_instance\_public\_ip) | Public IP assigned to the instance |
 | <a name="output_security_group_id"></a> [security\_group\_id](#output\_security\_group\_id) | Security group ID |
+
+## Diagram
+
+![Terraform Graph](../../media/ec2_n8n_graph.svg)

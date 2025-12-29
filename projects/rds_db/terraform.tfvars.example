@@ -1,0 +1,61 @@
+aws_region = "eu-west-1"
+project    = "rds-db"
+
+db_name     = "shared_db"
+db_username = "dbadmin"
+
+db_engine_version = "16"
+
+db_instance_class = {
+  dev     = "db.t4g.micro"
+  staging = "db.t4g.small"
+  prod    = "db.t4g.medium"
+}
+
+db_allocated_storage = {
+  dev     = 20
+  staging = 50
+  prod    = 100
+}
+
+db_max_allocated_storage = {
+  dev     = 50
+  staging = 100
+  prod    = 200
+}
+
+db_multi_az = {
+  dev     = false
+  staging = false
+  prod    = true
+}
+
+db_backup_retention_period = {
+  dev     = 1
+  staging = 7
+  prod    = 7
+}
+
+db_deletion_protection = {
+  dev     = false
+  staging = false
+  prod    = true
+}
+
+db_skip_final_snapshot = {
+  dev     = true
+  staging = true
+  prod    = false
+}
+
+db_performance_insights_enabled = {
+  dev     = false
+  staging = false
+  prod    = true
+}
+
+db_cloudwatch_logs_exports = {
+  dev     = []
+  staging = ["postgresql"]
+  prod    = ["postgresql", "upgrade"]
+}

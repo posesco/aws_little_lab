@@ -1,12 +1,12 @@
 resource "aws_security_group" "lab_sg" {
-  name        = "${var.project}-${var.env}-sg"
+  name        = "${var.project}-${local.env}-sg"
   description = "Allow inbound traffic and all outbound traffic"
   vpc_id      = data.terraform_remote_state.networking.outputs.vpc_id
 
   tags = merge(
     local.common_tags,
     {
-      ResourceName = "${var.project}-${var.env}-sg"
+      ResourceName = "${var.project}-${local.env}-sg"
       Component    = "security"
     }
   )

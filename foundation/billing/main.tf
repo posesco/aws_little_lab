@@ -1,6 +1,7 @@
 locals {
   env          = terraform.workspace
   budget_limit = lookup(var.budget_limits, local.env, var.budget_limits["dev"])
+  common_tags  = module.common_tags.tags
 }
 
 module "common_tags" {
@@ -10,8 +11,4 @@ module "common_tags" {
   additional_tags = {
     Component = "billing-alerts"
   }
-}
-
-locals {
-  common_tags = module.common_tags.tags
 }
