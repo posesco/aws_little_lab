@@ -36,10 +36,6 @@ master (protected, always deployable)
 | **GLOBAL** | `tfstate`, `iam` | No (default) | Account-wide resources. Single state for entire AWS account. |
 | **PER-ENV** | `networking`, `billing`, projects | Yes (dev/staging/prod) | Environment-specific. Separate state per workspace. |
 
-**Why GLOBAL?**
-- `tfstate`: The S3 bucket storing Terraform state is shared across all environments
-- `iam`: IAM users, groups, roles, and policies are AWS account-level resources
-
 ## Environments
 
 Environments are managed via **Terraform Workspaces** (PER-ENV modules only).
@@ -62,7 +58,6 @@ terraform init && terraform plan   # Direct execution
 
 ```
 s3://bucket-name/
-  ├── foundation/tfstate/terraform.tfstate              # GLOBAL (default workspace)
   ├── foundation/iam/terraform.tfstate                  # GLOBAL (default workspace)
   └── env:/
       ├── dev/foundation/networking/terraform.tfstate   # PER-ENV
@@ -186,12 +181,10 @@ For critical production issues requiring immediate fix:
 
 ### Required IAM Roles (AWS)
 
-Each role must have OIDC trust policy for GitHub Actions:
+The role must have an OpenID Connect (OIDC) trust policy for GitHub Actions:
 
 ```
-github-actions-terraform-dev
-github-actions-terraform-staging
-github-actions-terraform-prod
+github-actions-terraform
 ```
 
 ## Quick Reference
